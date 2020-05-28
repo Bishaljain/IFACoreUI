@@ -19,7 +19,7 @@
 
 @interface IFAHelpContentViewController ()
 @property (nonatomic, weak) UIViewController *IFA_targetViewController;
-@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) WKWebView *webView;
 @property (strong, nonatomic) IFAHtmlDocument *IFA_htmlDocument;
 @property(nonatomic, strong) UIBarButtonItem *closeBarButtonItem;
 @end
@@ -57,8 +57,7 @@
 }
 
 #pragma mark - UIWebViewDelegate protocol
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     __weak __typeof(self) l_weakSelf = self;
     void (^animations)(void) = ^{
         l_weakSelf.webView.alpha = 1;
@@ -70,8 +69,9 @@
                      completion:completion];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self webViewDidFinishLoad:webView];
+-(void) webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    [self webView:webView didFinishNavigation:navigation];
+    
 }
 
 #pragma mark - IFAViewControllerDelegate
@@ -82,11 +82,11 @@
 
 #pragma mark - Private
 
-- (UIWebView *)webView {
+- (WKWebView *)webView {
     if (!_webView) {
 
-        _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        _webView.delegate = self;
+        _webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+        _webView.navigationDelegate = self;
         _webView.opaque = NO;
         _webView.alpha = 0;
         _webView.backgroundColor = [UIColor clearColor];

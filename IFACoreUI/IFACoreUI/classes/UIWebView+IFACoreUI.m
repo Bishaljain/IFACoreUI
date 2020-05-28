@@ -20,7 +20,7 @@
 
 #import "UIWebView+IFACoreUI.h"
 
-@implementation UIWebView (IFACoreUI)
+@implementation WKWebView (IFACoreUI)
 
 #pragma mark - Public
 
@@ -38,11 +38,17 @@
 }
 
 -(void)ifa_updateViewPortWidth {
-    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.querySelector('meta[name=viewport]').setAttribute('content', 'width=%d, initial-scale=1.0, maximum-scale=1.0', false); ", (int)self.self.frame.size.width]];
+//    func evaluateJavaScript(_ javaScriptString: String,
+//    completionHandler: ((Any?, Error?) -> Void)? = nil)
+    [self evaluateJavaScript:[NSString stringWithFormat:@"document.querySelector('meta[name=viewport]').setAttribute('content', 'width=%d, initial-scale=1.0, maximum-scale=1.0', false); ", (int)self.self.frame.size.width] completionHandler:nil];
+//    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.querySelector('meta[name=viewport]').setAttribute('content', 'width=%d, initial-scale=1.0, maximum-scale=1.0', false); ", (int)self.self.frame.size.width]];
 }
 
 - (NSString *)ifa_html {
-    return [self stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
+//    return [self evaluateJavaScript:@"document.documentElement.outerHTML" completionHandler:^(id _Nullable, NSError * _Nullable error) {
+//        //
+//    }
+    return @""; //[self stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
 }
 
 @end

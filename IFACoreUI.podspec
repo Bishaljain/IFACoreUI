@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
     s.source_files      = 'IFACoreUI/IFACoreUI/classes/**/*.{h,m,swift}'
     s.resource          = 'IFACoreUI/IFACoreUI/resources/**/*.*'
     s.dependency 'IFAFoundation', '~> 2.0'
+    s.swift_version = '4.0'
 end

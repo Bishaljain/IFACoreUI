@@ -19,8 +19,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface UIWebView (IFACoreUI)
+@interface WKWebView (IFACoreUI)
 
 -(void)ifa_removeShadow;
 -(void)ifa_updateViewPortWidth;
